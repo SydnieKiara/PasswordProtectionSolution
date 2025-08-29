@@ -7,6 +7,10 @@
             if (string.IsNullOrEmpty(password) || string.IsNullOrWhiteSpace(password))
                 return "INELIGIBLE";
 
+            // New rule: Password must be at least 8 characters
+            if (password.Length < 8)
+                return "INELIGIBLE";
+
             bool hasUpper = false, hasLower = false, hasDigit = false, hasSymbol = false;
 
             foreach (char c in password)
@@ -31,9 +35,5 @@
                 _ => "INELIGIBLE"
             };
         }
-
-
-
-
     }
 }

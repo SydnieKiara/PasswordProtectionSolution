@@ -7,22 +7,26 @@ namespace PasswordProtection.Tests
     public class PasswordTest1
     {
         [Theory]
-        [InlineData("", "INELIGIBLE")]             // empty
-        [InlineData(" ", "INELIGIBLE")]            // space
-        [InlineData("abcdef", "WEAK")]             // only lowercase
-        [InlineData("ABCDEF", "WEAK")]             // only uppercase
-        [InlineData("123456", "WEAK")]             // only digits
-        [InlineData("!@#$%", "WEAK")]              // only symbols
-        [InlineData("abc123", "MEDIUM")]           // lowercase + digits
-        [InlineData("ABC123", "MEDIUM")]           // uppercase + digits
-        [InlineData("abc!", "MEDIUM")]             // lowercase + symbol
-        [InlineData("ABC!", "MEDIUM")]             // uppercase + symbol
-        [InlineData("Ab1", "MEDIUM")]              // upper + lower + digit
-        [InlineData("A1!", "MEDIUM")]              // upper + digit + symbol
-        [InlineData("Ab!", "MEDIUM")]              // upper + lower + symbol
-        [InlineData("a1!", "MEDIUM")]              // lower + digit + symbol
-        [InlineData("Ab1!", "STRONG")]             // all criteria
-        [InlineData("zZ9#", "STRONG")]             // all criteria
+        [InlineData("", "INELIGIBLE")]                 // empty
+        [InlineData(" ", "INELIGIBLE")]                // space
+        [InlineData("abcdef", "INELIGIBLE")]           // only lowercase, too short
+        [InlineData("ABCDEF", "INELIGIBLE")]           // only uppercase, too short
+        [InlineData("123456", "INELIGIBLE")]           // only digits, too short
+        [InlineData("!@#$%", "INELIGIBLE")]            // only symbols, too short
+        [InlineData("abcdefgh", "WEAK")]               // only lowercase, meets length
+        [InlineData("ABCDEFGH", "WEAK")]               // only uppercase, meets length
+        [InlineData("12345678", "WEAK")]               // only digits, meets length
+        [InlineData("!!!!!!!!", "WEAK")]               // only symbols, meets length
+        [InlineData("abc12345", "MEDIUM")]             // lowercase + digits
+        [InlineData("ABC12345", "MEDIUM")]             // uppercase + digits
+        [InlineData("abc!defg", "MEDIUM")]             // lowercase + symbol
+        [InlineData("ABC!DEFG", "MEDIUM")]             // uppercase + symbol
+        [InlineData("Abc12345", "MEDIUM")]             // upper + lower + digit
+        [InlineData("A1!aaaaa", "STRONG")]             // upper + digit + symbol
+        [InlineData("Ab!aaaaa", "MEDIUM")]             // upper + lower + symbol
+        [InlineData("a1!aaaaa", "MEDIUM")]             // lower + digit + symbol
+        [InlineData("Abc123!@5", "STRONG")]             // all criteria
+        [InlineData("zZ9#xxxxx", "STRONG")]             // all criteria
         public void Evaluate_GivenPassword_ReturnsCorrectStrength(string password, string expected)
         {
             var result = Password.Evaluate(password);
