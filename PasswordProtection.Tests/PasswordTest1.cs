@@ -1,5 +1,6 @@
 using PasswordProtection;
 using Xunit;
+using static PasswordProtection.Password;
 
 
 namespace PasswordProtection.Tests
@@ -32,5 +33,7 @@ namespace PasswordProtection.Tests
             var result = Password.Evaluate(password);
             Assert.Equal(expected, result);
         }
-    }
+
+       
+        }
 }

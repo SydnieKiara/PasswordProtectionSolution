@@ -52,6 +52,21 @@
                 4 => "STRONG",
                 _ => "INELIGIBLE"
             };
+
+            public static class UuidGenerator
+        {
+            /// <summary>
+            /// Generates a valid version 4 UUID (randomly generated).
+            /// Uses System.Guid to ensure RFC 4122 compliance.
+            /// </summary>
+            /// <returns>A string representation of the generated UUID (version 4).</returns>
+            public static string GenerateV4()
+            {
+                return Guid.NewGuid().ToString();
+            }
+
+
+
         }
     }
 }
