@@ -34,6 +34,24 @@ namespace PasswordProtection.Tests
             Assert.Equal(expected, result);
         }
 
-       
+        public class UuidGeneratorTests
+        {
+            [Fact]
+            public void GenerateV4_ReturnsValidUuid()
+            {
+                var uuid = UuidGenerator.GenerateV4();
+
+                // Check not null or empty
+                Assert.False(string.IsNullOrEmpty(uuid));
+
+                // Check valid GUID format
+                Assert.True(Guid.TryParse(uuid, out Guid parsed));
+
+                // Check version 4 (the 13th hex digit should be '4')
+                string hex = uuid.Replace("-", "");
+                Assert.Equal('4', hex[12]);
+            }
+
+
         }
 }
