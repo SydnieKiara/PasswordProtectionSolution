@@ -36,6 +36,15 @@ namespace PasswordProtection.Tests
 
         public class UuidGeneratorTests
         {
+
+            /// <summary>
+            /// Generates a version 4 UUID using random values.
+            /// A version 4 UUID is defined by RFC 4122 and has the format xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+            /// where '4' indicates version 4, and 'y' indicates one of 8, 9, A, or B.
+            /// </summary>
+            /// <returns>A string representation of the generated UUID (version 4).</returns>
+
+
             [Fact]
             public void GenerateV4_ReturnsValidUuid()
             {
